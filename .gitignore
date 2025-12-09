@@ -10,11 +10,6 @@ rust_files/oxide/*
 
 rust_files/oxide/data/*
 
-!rust_files/oxide/data/BetterLoot
-
-rust_files/oxide/data/BetterLoot/*
-
-!rust_files/oxide/data/BetterLoot/Blacklist.json
 !rust_files/server
 
 rust_files/server/feudal/*

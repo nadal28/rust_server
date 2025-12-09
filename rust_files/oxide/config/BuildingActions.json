@@ -1,0 +1,23 @@
+{
+  "Owner Can Demolish": true,
+  "Owner Can Repair": true,
+  "Owner Can Rotate": true,
+  "Owner Can Upgrade": true,
+
+  "In-game Friend Can Demolish": false,
+  "In-game Friend Can Repair": false,
+  "In-game Friend Can Rotate": false,
+  "In-game Friend Can Upgrade": false,
+
+  "Authorized Can Demolish": true,
+  "Authorized Can Repair": true,
+  "Authorized Can Rotate": true,
+  "Authorized Can Upgrade": true,
+
+  "Admin Can Demolish": true,
+  "Admin Can Repair": true,
+  "Admin Can Rotate": true,
+  "Admin Can Upgrade": true,
+
+  "Ignore settings": false
+}
