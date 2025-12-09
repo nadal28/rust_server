@@ -1,0 +1,20 @@
+{
+	"PercentageTier0": 0.3,
+	"PercentageTier1": 0.3,
+	"PercentageTier2": 0.4,
+	"PercentageBiomeArid": 0.4,
+	"PercentageBiomeTemperate": 0.65,
+	"PercentageBiomeTundra": 0.15,
+	"PercentageBiomeArctic": 0.3,
+	"PercentageBiomeJungle": 0,
+	"MainRoads": true,
+	"SideRoads": true,
+	"Trails": false,
+	"Rivers": true,
+	"Powerlines": false,
+	"AboveGroundRails": false,
+	"BelowGroundRails": false,
+	"UnderwaterLabs": false,
+	"PrefabBlacklist": [],
+	"PrefabWhitelist": []
+}
