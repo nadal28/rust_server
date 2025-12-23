@@ -26,24 +26,24 @@ namespace Oxide.Plugins
             bool isBuildingBlock = entity is BuildingBlock;
             bool isToolCupboard = entity is BuildingPrivlidge;
 
-            // Solo nos importan bloques de construcción y TC
+            // We only care about building blocks and tool cupboards
             if (!isBuildingBlock && !isToolCupboard)
                 return;
 
-            // Si TODO el daño es decay → dejamos vanilla
+            // If ALL damage is decay -> leave vanilla
             if (decayDamage > 0f && Mathf.Approximately(decayDamage, totalDamage))
                 return;
 
             BasePlayer attacker = info.InitiatorPlayer;
 
             // ─────────────────────────────────────────────
-            // 1) TOOL CUPBOARD: sólo players autorizados pueden dañarlo
+            // 1) TOOL CUPBOARD: only authorized players can damage it
             // ─────────────────────────────────────────────
             if (isToolCupboard)
             {
                 var cupboard = entity as BuildingPrivlidge;
 
-                // Sin player o no autorizado → bloquear todo salvo decay
+                // No player or not authorized -> block all except decay
                 if (attacker == null || cupboard == null || !cupboard.IsAuthed(attacker))
                 {
                     info.damageTypes.ScaleAll(0f);
@@ -54,30 +54,35 @@ namespace Oxide.Plugins
                     return;
                 }
 
-                // Player autorizado en ese TC → daño normal (no tocamos nada)
+                // Authorized player for that TC -> normal damage (do nothing)
                 return;
             }
 
             // ─────────────────────────────────────────────
-            // 2) BUILDING BLOCKS: protegidos por TC salvo para autorizados
+            // 2) BUILDING BLOCKS: protected by TC except for authorized players
             // ─────────────────────────────────────────────
             if (isBuildingBlock)
             {
                 var block = entity as BuildingBlock;
 
-                // Miramos si este bloque está bajo algún TC
+                // EXCLUSION: allow twig-grade blocks to always receive damage (no protection).
+                // This makes twig blocks behave as unprotected regardless of TC.
+                if (block != null && block.grade == BuildingGrade.Enum.Twigs)
+                    return;
+
+                // Check if this block is under any TC
                 BuildingPrivlidge priv = block?.GetBuildingPrivilege();
 
-                // Si no hay TC que lo proteja → comportamiento vanilla
+                // If no TC protecting it -> vanilla behaviour
                 if (priv == null)
                     return;
 
-                // Hay TC: si el atacante es player autorizado → daño normal
+                // There is a TC: if attacker is authorized -> normal damage
                 if (attacker != null && priv.IsAuthed(attacker))
                     return;
 
-                // Cualquier otro (no autorizado / NPC / heli / sin player):
-                // bloquear todo el daño salvo decay
+                // Any other (not authorized / NPC / heli / no player):
+                // block all damage except decay
                 info.damageTypes.ScaleAll(0f);
 
                 if (decayDamage > 0f)
