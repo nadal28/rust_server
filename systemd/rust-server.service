@@ -1,0 +1,14 @@
+[Unit]
+Description=Rust Dedicated Server
+After=network.target
+
+[Service]
+Type=simple
+User=rust
+WorkingDirectory=/home/rust/rust_server
+ExecStart=/home/rust/rust_server/3_run_server.sh
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
