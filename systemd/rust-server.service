@@ -5,8 +5,8 @@ After=network.target
 [Service]
 Type=simple
 User=rust
-WorkingDirectory=/home/rust/rust_server
-ExecStart=/home/rust/rust_server/3_run_server.sh
+WorkingDirectory=/home/rust/rust_server/rust_files
+ExecStart=/home/rust/rust_server/rust_files/runds.sh
 Restart=always
 RestartSec=5
 
