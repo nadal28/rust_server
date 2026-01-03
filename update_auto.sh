@@ -9,15 +9,26 @@ SETUP_DIR="/home/rust/rust_server"
 CHECK_SCRIPT="$SETUP_DIR/check_update.sh"
 GLOBAL_MSG="$SETUP_DIR/rust_global_message.py"
 RCON_SEND="$SETUP_DIR/send_rcon.py"
-LOG="/home/rust/rust_server/rust_update_auto.log"
+LOG="/home/rust/rust_server/update_auto.log"
 INSTALL1="$SETUP_DIR/1_install_rust.sh"
 INSTALL2="$SETUP_DIR/2_install_oxide.sh"
 SERVICE_NAME="rust-server"
 COUNTDOWN_MIN=10
 
-# Ensure log exists
+# Ensure log exists and has correct owner/permissions
 mkdir -p "$(dirname "$LOG")"
-touch "$LOG"
+
+if [ ! -e "$LOG" ]; then
+  touch "$LOG"
+  # try to set ownership to rust:rust; ignore error if not allowed
+  chown rust:rust "$LOG" 2>/dev/null || true
+  chmod 664 "$LOG" 2>/dev/null || true
+else
+  # ensure ownership and permissions are correct (best effort)
+  chown rust:rust "$LOG" 2>/dev/null || true
+  chmod 664 "$LOG" 2>/dev/null || true
+fi
+
 
 timestamp() { date "+%Y-%m-%d %H:%M:%S"; }
 
