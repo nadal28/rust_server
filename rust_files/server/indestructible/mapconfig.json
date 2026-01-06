@@ -12,25 +12,16 @@
   "Trails": true,
   "Rivers": true,
   "Powerlines": false,
-  "AboveGroundRails": false,
+  "AboveGroundRails": true,
   "BelowGroundRails": false,
-  "UnderwaterLabs": false,
+  "UnderwaterLabs": true,
   "PrefabBlacklist": [
-    "harbor_1",
     "iceberg",
     "ferry_terminal",
-    "fishing_village_a",
     "radtown",
-    "launch_site",
-    "trainyard",
-    "junkyard",
     "airfield",
     "swamp",
-    "powerplant",
-    "nuclear_missile_silo",
-    "satellite_dish",
-    "stables_b",
-    "train_tunnels"
+    "powerplant"
   ],
   "PrefabWhitelist": []
 }
